@@ -14,7 +14,7 @@
 		
 		<article>
 		
-			<!-- SEÇÃO INICIAL -->
+			<!-- SEACAO INICIAL -->
 			<section>
 				<img src="img/logo.png">
 				<h1>A Mirror Fashion</h1>
