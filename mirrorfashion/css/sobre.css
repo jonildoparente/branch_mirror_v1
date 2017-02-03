@@ -1,0 +1,129 @@
+
+
+
+/* 
+	 O navegador vericará se a fonte “Arial” está disponível e a utilizará para renderizar os textos de
+todos os elementos do nosso documento que, por cascata, herdarão essa propriedade do elemento body.
+	
+	Caso a fonte “Arial” não esteja disponível, o navegador vericará a disponibilidade da próxima fonte declarada, 
+no nosso exemplo a “Helvetica”. Caso o navegador não encontre também essa fonte, ele solicita qualquer
+fonte que pertença à família “sans-serif ”, declarada logo a seguir, e a utiliza para exibir o texto, não importa
+qual seja ela.
+*/
+body {
+	color: #333333; 
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	
+	/* Para centralizar o body como no design, podemos usar o truque de colocar um tamanho fixo e margens
+	auto na esquerda e na direita: */
+	margin-left: auto;
+	margin-right: auto;
+	width: 940px;
+}
+
+p {
+	padding: 0 45px;
+	text-indent: 55px;
+}
+
+
+h1 {
+	background-image: url(.../img/sobre-background.jpg);
+	padding: 10px;
+}
+
+h2 {
+	border-bottom: 2px solid #333333;
+	background: yellow;
+	margin-top: 30px;
+}
+
+/* Notação hexadecimal, mas comum do que utilizar a sintaxe RGB */
+h3 {
+	background: #F2EDED;
+}
+
+
+/* Add em 20/07/2015 */
+/* As primeiras letras de cada paragráfo em maiúsculas */
+p:FIRST-LETTER {
+	font-weight: bold;
+}
+
+
+/* Add em 20/07/2015 */
+/* Remover a identação do primeiro paragráfo */
+h1 + p {
+	text-indent: 0;
+}
+
+
+/* Transformando em small caps a primeira linha. */
+p:FIRST-LINE {
+	font-variant: small-caps;
+}
+
+
+/* Outros estilos de bordas: solid, dashed, dotted, double, groove etc;  */
+/* Outros valores para text-align: left, right e justify. */
+figure {
+	background-color: #F2EDED;
+	border: 1px solid #ccc;
+	text-align: center;
+	
+	padding: 15px;
+	margin: 30px;
+}
+
+figcaption {
+	font-style: italic;
+	margin-top: 10px;
+}
+
+#centro-distribuicao {
+	margin-left: auto;
+	margin-right: auto;
+	width: 550px;
+	
+	/*float: left;
+	margin: 0 0 10px 5px*/
+}
+
+/*#familia-pelho {
+	margin: auto;
+	margin-right: auto;
+	width: 300px;
+}*/
+
+#familia-pelho {
+	float: right;
+	margin: 0 0 10px 10px;
+		
+}
+
+footer {
+	background-image: url(../img/fundo-rodape.png);
+}
+
+/*
+#rodape {
+	color: #777;
+	margin: 30px 0;
+	padding: 30px 0;
+}
+
+#rodape img {
+	margin-right: 30px;
+	vertical-align: middle;
+	width: 94px;
+}
+*/
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+@CHARSET "ISO-8859-1";
+
+.container {
+	width: 96%;
+}
+
+/* Ajustar os elementos do topo da p·gina. Centralizar o logotipo na p·gina, esconder as informaÁıes (secund·rias) sobre a Sacola. 
+   Ajustar o menu para ùcar abaixo do logo e n„o mais posicionado ‡ direita.
+*/
+header h1 {
+	text-align: center;
+}
+
+
+header h1 img {
+	max-width: 50%;
+}
+
+
+.sacola {
+	display: none;
+}
+
+
+.menu-opcoes {
+	position: static;
+	text-align: center;
+}
+
+/** Ajustar a posiÁ„o do menu do topo e, automaticamente, os links se posicionaram formando duas linhas. 
+    Aumentando espaÁo das margens, para permitir que o usu·rio acesse as opÁıes do celular.
+*/
+.menu-opcoes ul li {
+	display: inline-block;
+	margin: 5px;
+}
+
+
+/* ocupar 100% da tela com o menu e a busca. 
+/* A imagem de destaque dever· ser redimensionada para ocupar 100% da tela e n„o estourar o tamanho.  
+**/
+.busca,
+.menu-departamentos,
+.destaque img {
+	margin-right: 0;
+	width: 100%;
+}
+
+.painel {
+	width: auto;
+}
+
+
+.painel li {
+	width: 30%;
+}
+
+
+.painel img {
+	width: 100%;
+}
+
+
+/* Reposicionando o controle de pause/play */
+.play,
+.pause {
+	top: auto;
+	right: auto;
+	left: 10px;
+	bottom: 10px;
+}
+
+
+
+
+
+
+

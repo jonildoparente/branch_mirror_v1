@@ -1,0 +1,366 @@
+
+@CHARSET "ISO-8859-1";
+
+
+/* Desenhar as bolinhas coloridas com pseudo-elementos do CSS usando um truque com bordas redondas grandes */
+.cores label:AFTER {
+	content: '';
+	display: block;
+	
+	/* Efeito "arredondado" na borda da imagem */
+	border-radius: 50%;
+	
+	width: 50px;
+	height: 50px;
+}
+
+
+/* Seta a cor das label (opÁ„o), conforme a cor */
+label[for=verde]:after {
+	background-color: #33CC66;
+}
+
+
+/* Seta a cor das label (opÁ„o), conforme a cor */
+label[for=rosa]:after {
+	background-color: #FF6666;
+}
+
+/* Seta a cor das label (opÁ„o), conforme a cor */
+label[for=azul]:after {
+	background-color: #6666FF;
+}
+
+
+/*****************************************************************************************************/
+
+/*PrÛximo passo È estilizar a bolinha atualmente selecionada usando pseudo-classe :checked*/
+.cores input:checked + label:after {
+	border: 6px solid rgba(0, 0, 0, 0.3);
+}
+
+/* A borda da bolinha selecionada aumenta o tamanho total da bolinha por causa do box model padr„o. 
+   Uma soluÁ„o È trocar o box model com a propriedade box-sizing. */
+.cores label:after {
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+}
+
+
+/* Agora que temos as bolinhas coloridas visuais confiùguradas, a bolinha do input radio È desnecess·ria */
+.cores input[type=radio] {
+	display: none;
+}
+
+
+/* Para fechar a funcionalidade de escolha das cores, falta apenas exibir apenas a imagem atualmente selecionada.
+	Outra forma de falar isso È que devemos esconder as imagens dos radios n„o selecionados. */
+.cores input:not(:checked) + label img {
+	display: none;
+}
+
+/* Implementar o posicionamento correto das bolinhas lado a lado. Para isso, use position:absolute j· que seus tamanhos s„o conhecidos */
+.cores label:after {
+	position: absolute;
+}
+
+/* As bolinhas v„o ser posicionadas com relaÁ„o ao fieldset cores, ent„o ele precisa estar posicionado. 
+O padding superior È para abrir espaÁo para as bolinhas */ 
+.cores {
+	position: relative;
+	padding-top: 90px;
+}
+
+
+/* Cada bolinha È um label:after, basta posicion·-las absolutamente.  */
+.cores label:after {
+	position: absolute;
+	top: 30px;
+}
+
+
+/* Se vocÍ testar a p·gina do jeito que ela est· agora no Chrome e no Firefox, vocÍ ver·uma diferenÁa no posicionamento das bolinhas. 
+  No Firefox, elas ùcar„o mais para baixo do que no Chrome. Isso acontece porque o Firefox d· um tratamento especial para 
+as tags <fieldset> e <legend>. No caso, o elemento <legend> n„o È considerado pelo Firefox como parte do ùeldset e, assim, o
+padding que colocamos ùca muito grande nesse navegador. Uma forma de resolver esse problema È deixar o <legend> posicionado absolutamente
+*/
+.cores legend {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+/* Uma soluÁ„o responsiva È que as imagens se adaptem ao tamanho da tela. ¿s vezes, usamos imagens maiores e, quando a tela È pequena, 
+a imagem ùfica "vazando" para fora do elemento pai. Uma forma de corrigir esse problema È garantir que ela nunca passe o tamanho 
+do pai com max-width */
+.cores label img {
+	display: block;
+	max-width: 100%;
+}
+
+
+/*	Nosso max-width: 100% n„o vai funcionar no Firefox. Neste navegador, o elemento fieldset n„o respeita o comportamento 
+correto de largura de um elemento e, assim, a largura da imagem tambÈm fiùca incorreta.
+
+	Para contornar o bug, podemos colocar a propriedade display com o valor table-column no fiùeldset. No entanto, ao fazer isso, 
+quebraremos o nosso layout no Internet Explorer ’˛. AsoluÁ„o È aplicar essa regra somente no Firefox. Para isso, podemos colocar 
+essa regra dentro de umamedia query que sÛ vai funcionar nesse navegador.
+
+	Se estiver desenvolvendo para o Firefox, coloque o cÛdigo acima logo no comeÁo do arquivo CSS.
+
+*/
+@media (min--moz-device-pixel-ratio:0) {
+	fieldset {
+		display: table-column;
+	}
+}
+
+
+/*****************************************************************************************************************************/
+
+/* As bolinhas fiùcaram sobrepostas na esquerda. Para corrigir, basta colocar uma coordenada left diferente para cada uma */
+
+label[for=verde]:after {
+	left: 0;
+}
+
+
+label[for=rosa]:after {
+	left: 60px;
+}
+
+
+label[for=azul]:after {
+	left: 120px;
+}
+
+/*****************************************************************************************************************************/
+
+/* Detalhes de tipografiùa e espaÁamento para toda p·gina de produtos  */
+.produto {
+	color: #333;
+	line-height: 1.3;
+	margin-top: 2em;
+}
+
+
+/*O nome do produto e seu preÁo tambÈm ganham estilo:*/
+.produto h1 {
+	font-size: 1.8em;
+	font-weight: bold;
+}
+
+.produto p {
+	font-size: 1.2em;
+	font-style: italic;
+	margin-bottom: 1em;
+}
+
+/* O <legend> ganha um destaque: */
+.produto legend {
+	display: block;
+	font: bold 0.9em/2.5 Arial;
+	text-transform: uppercase;
+}
+
+/* O bot„o de comprar deve ùficar em evidÍncia: */
+.comprar {
+	background: #91bd3c;
+	border: none;
+	color: #333;
+	
+	font-size: 1.4em;
+	text-transform: uppercase;
+	      
+	box-shadow: 0 1px 3px #777;
+	
+	display: block;
+	padding: 0.5em 1em;
+	margin: 1em 0;
+}
+
+
+/* Quando selecionamos a bolinha, uma borda escura aparece. 
+   Use transition para fazer a borda aparecer suavemente, como um fadein. 
+*/
+.cores label:after {
+	border: 6px solid rgba(0, 0, 0, 0);
+	transition: 1s;
+}
+
+
+/* E podemos adicionar tambÈm um estilo para quando passar com o mouse em cima da bolinha, mostrar
+uma borda mais leve, tambÈm no inÌcio de produto.css:*/
+.cores label:hover:after {
+	border: 6px solid rgba(0, 0, 0, 0.1);
+}
+
+
+/*********************************************************************************/
+/***************************** Media Query ****************************************************/
+/*********************************************************************************/
+@media (min-width: 630px) {
+	
+	.produto {
+	
+		/* a foto vai se posicionar absolutamente com relaÁ„o a esse elemento, por isso preciso estar posicionado */
+		position: relative;
+	
+		/* deixo 40% de espaÁo em branco na esquerda para foto ocupar */
+		padding-left: 40%;
+	}
+	
+	
+	.cores {
+		
+		/* eu era relative antes; reinicio para static para evitar que a foto se posicione com relaÁ„o a mim */
+		position: static;
+		
+		/* reinicio meu padding-top que tinha antes e n„o preciso mais */
+		padding: 0;
+		
+	}
+	
+	.cores legend {
+		/* eu era absolute antes, para ter o mesmo comportamento no Chrome e no Firefox; agora quero voltar ao fluxo da p·gina */
+		position: static;
+	}
+	
+	
+	.cores label img {
+		/* imagem se posiciona absolutamente ‡ esquerda com relaÁ„o ao .produto */
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	
+	
+	.cores label:after {
+		/* as bolinhas coloridas tinham posiÁ„o absoluta. N„o precisamos mais, basta flutuar uma do lado da outra */
+		position: static;
+		float: left;
+	}
+	
+	
+	/* Para evitar que a imagem vaze para fora do espaÁo que lhe foi determinado, vamos usar as propriedades max-width e max-height */
+	.cores label img {
+		max-width: 35%;
+		max-height: 100%;
+	}
+	
+	
+	/* Podemos aumentar um pouco o tamanho das fontes usadas no produto. 
+	   Como usamos em antes, basta aumentar a fonte do elemento pai, o produto e tudo escala proporcionalmente */
+	.produto {
+	
+		/* Utilizado para dar Ínfase a determinado trecho do texto, È muito utilizado com fins de SEO para determinar palavras que 
+		pretendem ser encontradas por motores de busca, utilize com moderaÁ„o para n„o banalizar a tag */
+		font-size: 1.2em;
+	}
+	
+	
+	/* Ultimo ajuste: È uma pequena margem entre as bolinhas coloridas */
+	.cores label:after {
+		margin-right: 10px;
+	}
+	
+	
+	fieldset {
+		
+		display: inline-block;
+		vertical-align: top;
+		
+		margin: 1em 0;
+		min-width: 200px;
+		width: 45%;
+	
+	}	
+	
+	
+} /* Media Query */
+
+
+
+/* Deixandos a formataÁ„o da div detalhes mais bonita */
+.detalhes {
+	padding: 2em 0;
+}
+
+.detalhes h2 {
+	font-size: 1.5em;
+	line-height: 2;
+}
+
+.detalhes p {
+	margin: 1em 0;
+	font-size: 1em;
+	line-height: 1.5;
+	max-width: 36em;
+}
+
+
+@media (min-width: 500px) {
+	.detalhes {
+		font-size: 1.2em;
+	}
+}
+
+
+/* Estilize a tabela para deix·-la mais agrad·vel. Use o seletor de ùlhos m˙ltiplos para um estilo zebrado */
+
+table {
+	border-spacing: 0.2em;
+	border-collapse: separete;
+}
+
+thead {
+	background-color: #999;
+}
+
+thead th {
+	font-weight: bold;
+	padding: 0.3em 1em;
+	text-align: center;
+}
+
+td {
+	padding: 0.3em;
+}
+
+tr:nth:child(2n) {
+	background-color: #ccc;
+}
+
+td:first-child {
+	font-style: italic;
+}
+
+
+.produto-back {
+	background-color: #F2F2F2;
+	margin-top: 1em;
+	border-top: 2px solid #ccc;
+}
+
+
+.cores label img {
+	border: 2px solid #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
